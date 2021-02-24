@@ -282,7 +282,7 @@ syntax region  juliatextString		matchgroup=juliaStringDelim start=+\<text\z("\("
 syntax region  juliahtmlString		matchgroup=juliaStringDelim start=+\<html\z("\(""\)\?\)+ skip=+\%(\\\\\)*\\"+ end=+\z1+ contains=@juliaSpecialCharsRaw
 syntax region  juliaint128String	matchgroup=juliaStringDelim start=+\<u\?int128\z("\(""\)\?\)+ skip=+\%(\\\\\)*\\"+ end=+\z1+ contains=@juliaSpecialCharsRaw
 
-syntax region  juliaDocString		matchgroup=juliaDocStringDelim fold start=+^"""+ skip=+\%(\\\\\)*\\"+ end=+"""+ contains=@juliaStringVars,@juliaSpecialChars,@juliaSpellcheckDocStrings
+syntax region  juliaDocString		matchgroup=juliaDocStringDelim fold start=+^\(\s\|\)\(@doc\sMarkdown.doc\|\)"""+ skip=+\%(\\\\\)*\\"+ end=+"""+ contains=@juliaStringVars,@juliaSpecialChars,@juliaSpellcheckDocStrings
 
 exec 'syntax region  juliaPrintfMacro		contained transparent start="@s\?printf(" end=")\@'.s:d(1).'<=" contains=juliaMacro,juliaPrintfParBlock'
 syntax region  juliaPrintfMacro		contained transparent start="@s\?printf\s\+" end="\ze\%([])};#]\|$\|\<for\>\)" contains=@juliaExprsPrintf,juliaMacro,juliaSymbolS,juliaQuotedParBlockS
