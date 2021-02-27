@@ -76,7 +76,16 @@ syntax cluster juliaExprsPrintf		contains=@juliaExpressions,@juliaPrintfItems
 syntax cluster juliaParItems		contains=juliaParBlock,juliaSqBraIdxBlock,juliaSqBraBlock,juliaCurBraBlock,juliaQuotedParBlock,juliaQuotedQMarkPar
 syntax cluster juliaKeywordItems	contains=juliaKeyword,juliaImportLine,juliaInfixKeyword,juliaRepKeyword
 syntax cluster juliaBlocksItems		contains=juliaConditionalBlock,juliaWhileBlock,juliaForBlock,juliaBeginBlock,juliaFunctionBlock,juliaMacroBlock,juliaQuoteBlock,juliaTypeBlock,juliaImmutableBlock,juliaExceptionBlock,juliaLetBlock,juliaDoBlock,juliaModuleBlock,juliaStructBlock,juliaMutableStructBlock,juliaAbstractBlock,juliaPrimitiveBlock
-syntax cluster juliaTypesItems		contains=juliaBaseTypeBasic,juliaBaseTypeNum,juliaBaseTypeC,juliaBaseTypeError,juliaBaseTypeIter,juliaBaseTypeString,juliaBaseTypeArray,juliaBaseTypeDict,juliaBaseTypeSet,juliaBaseTypeIO,juliaBaseTypeProcess,juliaBaseTypeRange,juliaBaseTypeRegex,juliaBaseTypeFact,juliaBaseTypeFact,juliaBaseTypeSort,juliaBaseTypeRound,juliaBaseTypeSpecial,juliaBaseTypeRandom,juliaBaseTypeDisplay,juliaBaseTypeTime,juliaBaseTypeOther
+syntax cluster juliaTypesItems		contains=juliaBaseTypeBasic,juliaBaseTypeNum,juliaBaseTypeC,juliaBaseTypeError,juliaBaseTypeIter,juliaBaseTypeString,juliaBaseTypeArray,juliaBaseTypeDict,juliaBaseTypeSet,juliaBaseTypeIO,juliaBaseTypeProcess,juliaBaseTypeRange,juliaBaseTypeRegex,juliaBaseTypeFact,juliaBaseTypeFact,juliaBaseTypeSort,juliaBaseTypeRound,juliaBaseTypeSpecial,juliaBaseTypeRandom,juliaBaseTypeDisplay,juliaBaseTypeTime,juliaBaseTypeOther,oscarTypes,oscarConstructors
+
+"###############################################################################
+"# OSCAR
+"###############################################################################
+
+syntax cluster oscarTypes           contains=nemoParentType,nemoElementType
+syntax cluster oscarConstructors    contains=nemoParentConstructor,nemoElementConstructor
+
+"###############################################################################
 
 syntax cluster juliaConstItems  	contains=juliaConstNum,juliaConstBool,juliaConstEnv,juliaConstMMap,juliaConstC,juliaConstGeneric,juliaConstIO,juliaPossibleEuler
 
@@ -211,6 +220,20 @@ exec 'syntax region  juliaMacroCallP	contained transparent start="@' . s:idregex
 exec 'syntax region  juliaMacroCallP	contained transparent start="@.(" end=")\@'.s:d(1).'<=" contains=juliaMacro,juliaParBlock'
 
 syntax match   juliaNumbers		transparent "\<\d\|\.\d\|\<im\>" contains=juliaNumber,juliaFloat,juliaComplexUnit
+
+"###############################################################################
+"# OSCAR
+"###############################################################################
+
+syntax match nemoParentType display "\<\%(FlintIntegerRing\|FlintRationalField\|NmodRing\|FqNmodFiniteField\|FqFiniteField\|FlintPadicField\|FlintQadicField\|FmpzPolyRing\|FmpqPolyRing\|NmodPolyRing\|FmpzModPolyRing\|FqPolyRing\|FqNmodPolyRing\|FmpzMPolyRing\|FmpzRelSeriesRing\|FmpzAbsSeriesRing\|FmpqRelSeriesRing\|FmpqAbsSeriesRing\|FmpzModRelSeriesRing\|FmpzModAbsSeriesRing\|NmodRelSeriesRing\|FqNmodRelSeriesRing\|FqNmodAbsSeriesRing\|FqRelSeriesRing\|FqAbsSeriesRing\|FmpzMatSpace\|FmpqMatSpace\|NmodMatSpace\|FqNmodMatSpace\|FqMatSpace\|SymmetricGroup\|AnticNumberField\|ArbField\|AcbField\|ArbPolyRing\|AcbPolyRing\|ArbMatSpace\|AcbMatSpace\)\>"
+
+syntax match nemoElementType display "\<\%(fmpz\|fmpq\|nmod\|fq_nmod\|fq\|padic\|qadic\|fmpz_poly\|fmpq_poly\|nmod_poly\|fmpz_mod_poly\|fq_poly\|fq_nmod_poly\|fmpz_mpoly\|fmpz_rel_series\|fmpz_abs_series\|fmpq_rel_series\|fmpq_abs_series\|fmpz_mod_rel_series\|fmpz_mod_abs_series\|nmod_rel_series\|fq_nmod_rel_series\|fq_nmod_abs_series\|fq_rel_series\|fq_abs_series\|fmpz_mat\|fmpq_mat\|nmod_mat\|fq_nmod_mat\|fq_mat\|perm\|nf_elem\|arb\|acb\|arb_poly\|acb_poly\|arb_mat\|acb_mat\)\>"
+
+syntax match nemoParentConstructor display "\<\%(RealField\|ComplexField\|FlintFiniteField\|FiniteField\|NumberField\|CyclotomicField\|MaximalRealSubfield\|PadicField\|QadicField\)\>"
+
+syntax match nemoElementConstructor display "\<\%(FlintZZ\|ZZ\|FlintQQ\|QQ\)\>"
+
+"###############################################################################
 
 "integer regexes
 let s:dec_regex = '\d\%(_\?\d\)*\%(\>\|im\>\|\ze\D\)'
@@ -495,6 +518,18 @@ hi def link juliaErrorSemicol		juliaError
 hi def link juliaErrorPrintfFmt		juliaError
 
 hi def link juliaError			Error
+
+"###############################################################################
+"# OSCAR
+"###############################################################################
+
+hi def link nemoParentType          Type
+hi def link nemoElementType         Type
+
+hi def link nemoParentConstructor   Function
+hi def link nemoElementConstructor  Function
+
+"###############################################################################
 
 syntax sync fromstart
 
